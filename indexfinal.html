@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Economic Barb: Seu Agendamento de Barbearia Simplificado</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --accent-color: #DA1B2E;
+            --accent-light: #e74151;
+            --bg-dark: #1F1E1E;
+            --bg-light: #FFFFFF;
+            --text-dark: #3B3535;
+            --text-light: #FFFFFF;
+            --highlight-bg: #f9d2d6;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Sora', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: #f5f5f5;
+             background: linear-gradient(-45deg, #1e3c72, #2a5298, #1e3c72, #0f2027);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Navbar */
+        .navbar {
+            height: 75px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 40px;
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .logo {
+            height: 55px;
+            width: 55px;
+            border-radius: 50%;
+            background-image: url('https://imgproxy.gamma.app/resize/quality:80/resizing_type:fit/width:2000/height:2000/https://cdn.gamma.app/inj0m6dra9x4zpn/136e574fcefb404eb23206d72e4c93f4/original/IMG-20250614-WA0018.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://imgproxy.gamma.app/resize/quality:80/resizing_type:fit/width:2400/https://cdn.gamma.app/inj0m6dra9x4zpn/a072bab7f8ba4c0ab0913076bb33d6db/original/IMG-20250614-WA0018.jpg');
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+        }
+        
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: -1;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            padding: 0 20px;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .btn {
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            min-width: 150px;
+            text-align: center;
+        }
+        
+        .btn-primary {
+            background-color: var(--accent-color);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--accent-light);
+        }
+        
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--accent-color);
+            border: 2px solid var(--accent-color);
+             
+        }
+        
+        .btn-secondary:hover {
+            background-color: rgba(255,255,255,0.1);
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 80px 0;
+            background-color: white;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--bg-dark);
+            margin-bottom: 15px;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+        
+        .feature-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 20px;
+            color: var(--accent-color);
+            font-size: 2rem;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--bg-dark);
+        }
+        
+        /* Haircut Process Section */
+        .process {
+            padding: 80px 0;
+            background-color: var(--bg-dark);
+            color: white;
+        }
+        
+        .process-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+        
+        .process-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+        }
+        
+        .process-item {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .process-number {
+            width: 40px;
+            height: 40px;
+            background-color: var(--accent-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+        
+        .process-desc h3 {
+            font-size: 1.3rem;
+            margin-bottom: 5px;
+        }
+        
+        .process-image {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        .process-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        /* Weekly Reset Section */
+        .weekly-reset {
+            padding: 80px 0;
+            background-color: var(--bg-dark);
+            color: white;
+            text-align: center;
+        }
+        
+        .weekly-reset h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .weekly-reset p {
+            max-width: 800px;
+            margin: 0 auto 30px;
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: white;
+            padding: 40px 0;
+            text-align: center;
+        }
+        
+        footer p {
+            margin-bottom: 20px;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-links a {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .process-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .btn-group {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .section-title h2,
+            .process-content h2,
+            .weekly-reset h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo"></div>
+        <div class="nav-links">
+            <a href="telalogin.html" class="btn-secondary" style="padding: 8px 16px;">Login</a>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Economic Barb: Seu Agendamento de Barbearia Simplificado</h1>
+            
+        </div>
+        
+        <!-- Embedded YouTube Video -->
+        <div style="position: absolute; bottom: 20px; width: 100%; max-width: 800px; margin: 0 auto;">
+            <iframe width="100%" height="315" src="https://www.youtube.com/embed/tyWf407aOWk?rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+    </section>
+    
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Experiência do Cliente: Encontre Sua Barbearia Ideal</h2>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">👤</div>
+                    <h3>Cadastro Fácil</h3>
+                    <p>Crie sua conta com um nome de usuário e senha simples para começar a explorar.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🔍</div>
+                    <h3>Pesquisa Inteligente</h3>
+                    <p>Encontre barbearias por nome ou localização usando nossa barra de pesquisa intuitiva.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🗺️</div>
+                    <h3>Explore por Região</h3>
+                    <p>Navegue por uma barra de rolagem para descobrir barbearias próximas e compare preços.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Haircut Process Section -->
+    <section class="process">
+        <div class="container">
+            <div class="process-grid">
+                <div class="process-content">
+                    <h2>Visão Detalhada da Barbearia e Agendamento</h2>
+                    
+                    <div class="process-item">
+                        <div class="process-number">1</div>
+                        <div class="process-desc">
+                            <h3>Informações Completas</h3>
+                            <p>Ao selecionar uma barbearia, visualize os preços dos cortes e a grade de horários semanais.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="process-item">
+                        <div class="process-number">2</div>
+                        <div class="process-desc">
+                            <h3>Status de Horários</h3>
+                            <p>Horários marcados são exibidos como "Marcado" com seu nome, e cancelados aparecem como "Cancelado".</p>
+                        </div>
+                    </div>
+                    
+                    <div class="process-item">
+                        <div class="process-number">3</div>
+                        <div class="process-desc">
+                            <h3>Tipos de Disponibilidade</h3>
+                            <ul style="list-style-type: none; text-align: left;">
+                                <li><strong>Disponível:</strong> Clique para agendar</li>
+                                <li><strong>Indisponível:</strong> Não é possível agendar</li>
+                                <li><strong>Marcado:</strong> Seu horário confirmado</li>
+                                <li><strong>Cancelado:</strong> Horário foi desmarcado</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="process-image">
+                    <img src="https://img.freepik.com/fotos-gratis/homem-em-um-salao-de-barbearia-fazendo-o-corte-de-cabelo-e-barba_1303-20953.jpg" alt="Barbearia">
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Barbershop Features Section -->
+    <section class="features" style="background-color: #f9f9f9;">
+        <div class="container">
+            <div class="process-grid" style="grid-template-columns: 1fr 1fr;">
+                <div class="process-image">
+                    <img src="https://imgproxy.gamma.app/resize/quality:80/resizing_type:fit/width:1200/https://cdn.gamma.app/inj0m6dra9x4zpn/703672aa8e624bbcbd51931126b6b976/original/mega-profissional-7-dicas-incriveis-para-fazer-sua-barbearia-bombar-1-media.jpg" alt="Barbeiro trabalhando">
+                </div>
+                
+                <div class="process-content">
+                    <h2 style="color: var(--bg-dark);">Experiência do Barbeiro: Gerencie seu Negócio</h2>
+                    
+                    <div class="process-item">
+                        <div class="process-number" style="background-color: var(--accent-color);">1</div>
+                        <div class="process-desc">
+                            <h3 style="color: var(--bg-dark);">Cadastre sua Barbearia</h3>
+                            <p>Crie sua conta com nome, senha, localização e defina os preços dos seus serviços.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="process-item">
+                        <div class="process-number" style="background-color: var(--accent-color);">2</div>
+                        <div class="process-desc">
+                            <h3 style="color: var(--bg-dark);">Controle de Horários</h3>
+                            <p>Selecione facilmente os horários disponíveis em intervalos de 1 hora. Todos os horários começam como "indisponíveis".</p>
+                        </div>
+                    </div>
+                    
+                    <div class="process-item">
+                        <div class="process-number" style="background-color: var(--accent-color);">3</div>
+                        <div class="process-desc">
+                            <h3 style="color: var(--bg-dark);">Acesso Rápido</h3>
+                            <p>Acesse todas as informações e horários da sua barbearia em um único local.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Weekly Reset Section -->
+    <section class="weekly-reset">
+        <div class="container">
+            <h2>Reinicialização Semanal de Horários</h2>
+            <p>
+                Para sua conveniência, todos os horários são automaticamente redefinidos para "indisponível" ao final de cada semana. 
+                Isso garante que você sempre comece uma nova semana com uma agenda limpa e pronta para ser atualizada com sua disponibilidade.
+            </p>
+            <p>
+                Essa funcionalidade simplifica a gestão semanal, permitindo que você configure sua agenda com flexibilidade e sem se preocupar com agendamentos antigos.
+            </p>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="logo" style="margin: 0 auto 20px;"></div>
+            <p>Economic Barb - Simplificando seu agendamento de barbearia</p>
+            <div class="footer-links">
+                <a href="#">Termos de Serviço</a>
+                <a href="#">Política de Privacidade</a>
+                <a href="#">Contato</a>
+            </div>
+            <p>&copy; 2024 Economic Barb. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+    
+  

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro - Economic Barb</title>
+    <link rel="stylesheet" href="stylefinal.css">
+    <style>
+        .hidden {
+            display: none;
+        }
+        form {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 400px;
+            margin: 40px auto;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            box-sizing: border-box;
+        }
+        h1 {
+            text-align: center;
+            margin-top: 30px;
+        }
+        a {
+            display: block;
+            text-align: center;
+            margin-top: 10px;
+            color: #f8f8f8;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Cadastro</h1>
+    <form>
+        <input type="text" placeholder="Nome de usuário" required><br>
+        <input type="password" placeholder="Senha" required><br>
+        
+        <select id="tipoUsuario" required>
+            <option value="cliente">Sou Cliente</option>
+            <option value="barbeiro">Sou Barbeiro</option>
+        </select><br>
+        
+        <div id="camposBarbeiro" class="hidden">
+            <input type="text" placeholder="CEP" required><br>
+        </div>
+        
+        <button type="submit"><a href="telalogin.html">Cadastro</a></button>
+    </form>
+    
+   
+
+    <script>
+        const tipoUsuario = document.getElementById('tipoUsuario');
+        const camposBarbeiro = document.getElementById('camposBarbeiro');
+
+        tipoUsuario.addEventListener('change', () => {
+            if (tipoUsuario.value === 'barbeiro') {
+                camposBarbeiro.classList.remove('hidden');
+            } else {
+                camposBarbeiro.classList.add('hidden');
+            }
+        });
+    </script>
+</body>
+</html>
